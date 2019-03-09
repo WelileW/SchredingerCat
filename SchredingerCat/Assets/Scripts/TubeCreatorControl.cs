@@ -12,7 +12,7 @@ public class TubeCreatorControl : MonoBehaviour
     private float _titleHeight = 2.5F;
     private float _titleWidth = 2.5F;
     private float _z = 10;
-    private float _space = 5;
+    private float _space = 4.5F;
 
     private int _height;
     private int _width;
@@ -56,11 +56,11 @@ public class TubeCreatorControl : MonoBehaviour
             for (int j = 0; j < _height; j++)
             {
                 var isAir = i < _wCenter;
-                var adding = isAir ? 0 : _space;
+                var adding = isAir ? -_space : _space;
 
                 var control = Instantiate(
                     GetTubePattern(_level.Tubes[i,j]), 
-                    new Vector3(_titleHeight * (i - _hCenter) + adding, _titleWidth * (j - _wCenter), _z), 
+                    new Vector3(_titleWidth * (i - _wCenter + 0.5F) + adding, _titleHeight * (j - _hCenter), _z), 
                     Quaternion.identity);
 
                 control.MultiRotate(_level.Rotations[i, j]);

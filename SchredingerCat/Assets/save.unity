@@ -141,7 +141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e3257ceb07d5d448a8962a3d2820d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tubePattern: {fileID: 5950398317019978267, guid: f242a075ef5fdcc41879480672eb1ec2,
+  _straightTubeControl: {fileID: 2181478730067766910, guid: 1a61831256277654e987d66fd6439de2,
+    type: 3}
+  _angleTubeControl: {fileID: 5538840672262656519, guid: c2bba464c6c579f4fa5fc268461e05c4,
+    type: 3}
+  _threeTubePattern: {fileID: 3134989122112982970, guid: 6d0695dfadee2b54e917a48fc5f04027,
+    type: 3}
+  _fourTubeControl: {fileID: 1312739951443895732, guid: cad38a0152c83a6428a134cba34c45f3,
     type: 3}
 --- !u!4 &305737618
 Transform:
@@ -207,9 +213,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 51.5
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

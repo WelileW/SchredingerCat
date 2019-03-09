@@ -34,6 +34,16 @@ public class Level
                 { TubeType.Four, TubeType.Four, TubeType.Four, TubeType.Four, TubeType.Four }
         };
 
+        level.Rotations = new int[,]
+        {
+                { 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0 },
+                { 0, 3, 0, 0, 0 },
+                { 2, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0 }
+        };
+
         level.CranePoison = new Dictionary<int, int>();
         level.CranePoison.Add(1, 1);
 
