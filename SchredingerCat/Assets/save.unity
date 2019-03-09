@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e3257ceb07d5d448a8962a3d2820d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tubePattern: {fileID: 2386063706058379657, guid: f242a075ef5fdcc41879480672eb1ec2,
+  _tubePattern: {fileID: 5950398317019978267, guid: f242a075ef5fdcc41879480672eb1ec2,
     type: 3}
 --- !u!4 &305737618
 Transform:
