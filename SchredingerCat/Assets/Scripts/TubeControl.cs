@@ -19,9 +19,29 @@ public class TubeControl : MonoBehaviour
 
     void OnMouseDown()
     {
-        Rotate();
+        Rotate(); 
 
         GameControl._instance.CheckMeasure();
+    }
+
+    public void SetTop(TubeControl top)
+    {
+        _top = top;
+    }
+
+    public void SetBottom(TubeControl bottom)
+    {
+        _bottom = bottom;
+    }
+
+    public void SetLeft(TubeControl left)
+    {
+        _left = left;
+    }
+
+    public void SetRight(TubeControl right)
+    {
+        _right = right;
     }
 
     public void MultiRotate(int count)
