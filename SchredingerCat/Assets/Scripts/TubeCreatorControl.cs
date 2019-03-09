@@ -24,7 +24,7 @@ public class TubeCreatorControl : MonoBehaviour
 
     private TubeControl[,] _map;
 
-    public void Generate(Level level)
+    public List<Crane> Generate(Level level)
     {
         _height = level.Height;
         _width = level.Width;
@@ -43,10 +43,15 @@ public class TubeCreatorControl : MonoBehaviour
         ConnectTubes();
 
         // Добавляем ссылки на краники
+        var cranes = ConnectCrane();
 
         // Добавляем ссылки на счетчики
+        ConnectCounter();
 
         // Добавляем ссылки на ящик
+        ConnectBox();
+
+        return cranes;
     }
 
     private void CreateTubes()
@@ -126,9 +131,40 @@ public class TubeCreatorControl : MonoBehaviour
         return _map[wigth, height];
     }
 
+    private List<Crane> ConnectCrane()
+    {
+        List<Crane> result = new List<Crane>();
+
+        foreach (var crane in _level.СraneAir)
+        {
+            result.Add(new Crane(_map[0, crane.Key], SideEnum.Right, crane.Value, true));
+        }
+
+        foreach (var crane in _level.СraneAir)
+        {
+            result.Add(new Crane(_map[_width - 1, crane.Key], SideEnum.Left, crane.Value, false));
+        }
+
+        return result;
+    }
+
     private void ConnectCounter()
     {
-        //_map[_wCenter - 1, _height - 1] = ;
-        //_map[_wCenter, _height - 1] = ;
+        _map[_wCenter - 1, _height - 1].SetRight(new Counter(LogicEnum.AirCounter));
+        _map[_wCenter, _height - 1].SetLeft(new Counter(LogicEnum.PoisonCounter));
+    }
+
+    private void ConnectBox()
+    {
+        var box = new Box(LogicEnum.Box);
+        for (int j = 1; j < _height - 1; j++)
+        {
+            _map[_wCenter - 1, j].SetRight(box);
+        }
+
+        for (int j = 1; j < _height - 1; j++)
+        {
+            _map[_wCenter, j].SetLeft(box);
+        }
     }
 }

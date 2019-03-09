@@ -24,22 +24,22 @@ public class TubeControl : MonoBehaviour, BaseInterface
         GameControl._instance.CheckMeasure();
     }
 
-    public void SetTop(TubeControl top)
+    public void SetTop(BaseInterface top)
     {
         _top = top;
     }
 
-    public void SetBottom(TubeControl bottom)
+    public void SetBottom(BaseInterface bottom)
     {
         _bottom = bottom;
     }
 
-    public void SetLeft(TubeControl left)
+    public void SetLeft(BaseInterface left)
     {
         _left = left;
     }
 
-    public void SetRight(TubeControl right)
+    public void SetRight(BaseInterface right)
     {
         _right = right;
     }
@@ -52,7 +52,7 @@ public class TubeControl : MonoBehaviour, BaseInterface
         }
     }              
 
-    public bool Flow(SideEnum flow, List<int> path)
+    public bool Flow(SideEnum flow, List<int> path, LogicEnum type)
     {
         if (path.Contains(Id))
             return false;
@@ -67,16 +67,16 @@ public class TubeControl : MonoBehaviour, BaseInterface
 
         var newFlow = _connected.Where(s => s != source).ToList();
 
-        if (newFlow.Contains(SideEnum.Top) && _top != null && _top.Flow(SideEnum.Top, newPath))
+        if (newFlow.Contains(SideEnum.Top) && _top != null && _top.Flow(SideEnum.Top, newPath, type))
             return true;
 
-        if (newFlow.Contains(SideEnum.Bottom) && _bottom != null && _bottom.Flow(SideEnum.Bottom, newPath))
+        if (newFlow.Contains(SideEnum.Bottom) && _bottom != null && _bottom.Flow(SideEnum.Bottom, newPath, type))
             return true;
 
-        if (newFlow.Contains(SideEnum.Right) && _right != null && _right.Flow(SideEnum.Right, newPath))
+        if (newFlow.Contains(SideEnum.Right) && _right != null && _right.Flow(SideEnum.Right, newPath, type))
             return true;
 
-        if (newFlow.Contains(SideEnum.Left) && _left != null && _left.Flow(SideEnum.Left, newPath))
+        if (newFlow.Contains(SideEnum.Left) && _left != null && _left.Flow(SideEnum.Left, newPath, type))
             return true;
 
         return false;

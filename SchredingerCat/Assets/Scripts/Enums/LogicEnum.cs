@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface BaseInterface
+public enum LogicEnum
 {
-    bool Flow(SideEnum flow, List<int> path, LogicEnum type);
+    PoisonCounter,
+    AirCounter,
+    Box
 }
