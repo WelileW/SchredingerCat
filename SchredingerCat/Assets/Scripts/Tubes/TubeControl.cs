@@ -4,12 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 // Base class
-public class TubeControl : MonoBehaviour
+public class TubeControl : MonoBehaviour, BaseInterface
 {
-    private TubeControl _top = null;
-    private TubeControl _bottom = null;
-    private TubeControl _left = null;
-    private TubeControl _right = null;
+    private BaseInterface _top = null;
+    private BaseInterface _bottom = null;
+    private BaseInterface _left = null;
+    private BaseInterface _right = null;
 
     public bool IsAir;
 
@@ -50,7 +50,7 @@ public class TubeControl : MonoBehaviour
         {
             Rotate();
         }
-    }
+    }              
 
     public bool Flow(SideEnum flow, List<int> path)
     {
