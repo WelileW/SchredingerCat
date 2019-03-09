@@ -10,6 +10,9 @@ public class GameControl : MonoBehaviour
 
     public TubeCreatorControl _tubeCreator;
 
+    public LeftCounterControl _airCounter;
+    public RightCounterControl _poisonCounter;
+
     private List<Crane> _cranes;
 
     // Init
@@ -42,9 +45,11 @@ public class GameControl : MonoBehaviour
     {
         var airCheck = _cranes.Where(c => c.IsAir).Sum(c => c.Flow(LogicEnum.AirCounter));
         Debug.Log($"Воздуха в счетчике {airCheck}");
+        _airCounter.SetScore(airCheck);
 
         var poisonCheck = _cranes.Where(c => !c.IsAir).Sum(c => c.Flow(LogicEnum.PoisonCounter));
         Debug.Log($"Яда в счетчике {poisonCheck}");
+        _poisonCounter.SetScore(poisonCheck);
     }
 
     public bool CheckEnd()
