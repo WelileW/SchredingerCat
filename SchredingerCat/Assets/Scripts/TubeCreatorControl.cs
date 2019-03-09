@@ -29,6 +29,8 @@ public class TubeCreatorControl : MonoBehaviour
         _height = level.Height;
         _width = level.Width;
 
+        _level = level;
+
         _wCenter = _width / 2;
         _hCenter = _height / 2;
 
@@ -58,7 +60,7 @@ public class TubeCreatorControl : MonoBehaviour
 
                 var control = Instantiate(
                     GetTubePattern(_level.Tubes[i,j]), 
-                    new Vector3(_titleHeight * (i - _hCenter) + adding, _titleHeight * (j - _wCenter), _z), 
+                    new Vector3(_titleHeight * (i - _hCenter) + adding, _titleWidth * (j - _wCenter), _z), 
                     Quaternion.identity);
 
                 control.MultiRotate(_level.Rotations[i, j]);
@@ -126,7 +128,7 @@ public class TubeCreatorControl : MonoBehaviour
 
     private void ConnectCounter()
     {
-        _map[_wCenter - 1, _height - 1] = ;
-        _map[_wCenter, _height - 1] = ;
+        //_map[_wCenter - 1, _height - 1] = ;
+        //_map[_wCenter, _height - 1] = ;
     }
 }

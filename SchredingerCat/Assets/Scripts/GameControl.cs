@@ -24,7 +24,7 @@ public class GameControl : MonoBehaviour
 
     void Start()
     {
-        _tubeCreator.Generate();
+        _tubeCreator.Generate(Level.GetLevelOne());
     }
 
     // Update is called once per frame
