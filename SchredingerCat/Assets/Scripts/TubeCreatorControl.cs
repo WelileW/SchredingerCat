@@ -4,23 +4,131 @@ using UnityEngine;
 
 public class TubeCreatorControl : MonoBehaviour
 {
-    public TubeControl _tubePattern;
+    public StraightTubeControl _straightTubeControl;
+    public AngleTubeControl _angleTubeControl;
+    public ThreeTubeControl _threeTubePattern;
+    public FourTubeControl _fourTubeControl;
 
-    private float _titleHeight = 2;
-    private float _titleWidth = 2;
+    private float _titleHeight = 2.5F;
+    private float _titleWidth = 2.5F;
     private float _z = 10;
+    private float _space = 5;
 
-    public void Generate()
+    private int _height;
+    private int _width;
+
+    private float _hCenter;
+    private int _wCenter;
+
+    private Level _level;
+
+    private TubeControl[,] _map;
+
+    public void Generate(Level level)
     {
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 6; j++)
-            {
-                var adding = i > 2 ? 2 : 0;
+        _height = level.Height;
+        _width = level.Width;
 
-                var control = Instantiate(_tubePattern, new Vector3(_titleHeight * (i - 3) + adding, _titleHeight * (j - 3), _z), Quaternion.identity);
-                control.MultiRotate(i);
+        _level = level;
+
+        _wCenter = _width / 2;
+        _hCenter = _height / 2;
+
+        _map = new TubeControl[_width, _height];
+
+        // Создем трубы
+        CreateTubes();
+
+        // Прокидываем ссылки
+        ConnectTubes();
+
+        // Добавляем ссылки на краники
+
+        // Добавляем ссылки на счетчики
+
+        // Добавляем ссылки на ящик
+    }
+
+    private void CreateTubes()
+    {
+        for (int i = 0; i < _width; i++)
+        {
+            for (int j = 0; j < _height; j++)
+            {
+                var isAir = i < _wCenter;
+                var adding = isAir ? 0 : _space;
+
+                var control = Instantiate(
+                    GetTubePattern(_level.Tubes[i,j]), 
+                    new Vector3(_titleHeight * (i - _hCenter) + adding, _titleWidth * (j - _wCenter), _z), 
+                    Quaternion.identity);
+
+                control.MultiRotate(_level.Rotations[i, j]);
+                control.IsAir = isAir;
+                control.Id = i * 10 + j;
+
+                _map[i, j] = control;
             }
         }
+    }
+
+    private TubeControl GetTubePattern(TubeType type)
+    {
+        switch (type)
+        {
+            case TubeType.Straight:
+                return _straightTubeControl;
+            case TubeType.Angle:
+                return _angleTubeControl;
+            case TubeType.Three:
+                return _threeTubePattern;
+            case TubeType.Four:
+                return _fourTubeControl;
+            default:
+                throw new System.Exception("Создение трубы: неизвестный тип");
+        }
+    }
+
+    private void ConnectTubes()
+    {
+        for (int i = 0; i < _width; i++)
+        {
+            for (int j = 0; j < _height; j++)
+            {
+                var tube = _map[i, j];
+
+                tube.SetTop(FindTube(i, j + 1));
+                tube.SetBottom(FindTube(i, j - 1));
+                tube.SetLeft(FindTube(i - 1, j));
+                tube.SetRight(FindTube(i + 1, j));
+            }
+        }
+
+        for (int j = 0; j < _height; j++)
+        {
+            _map[_wCenter - 1, j].SetRight(null);
+        }
+
+        for (int j = 0; j < _height; j++)
+        {
+            _map[_wCenter, j].SetLeft(null);
+        }
+    }
+
+    private TubeControl FindTube(int wigth, int height)
+    {
+        if (height < 0 || height >= _height)
+            return null;
+
+        if (wigth < 0 || wigth >= _width)
+            return null;
+
+        return _map[wigth, height];
+    }
+
+    private void ConnectCounter()
+    {
+        //_map[_wCenter - 1, _height - 1] = ;
+        //_map[_wCenter, _height - 1] = ;
     }
 }
