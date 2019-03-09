@@ -46,4 +46,15 @@ public class GameControl : MonoBehaviour
         var poisonCheck = _cranes.Where(c => !c.IsAir).Sum(c => c.Flow(LogicEnum.PoisonCounter));
         Debug.Log($"Яда в счетчике {poisonCheck}");
     }
+
+    public bool CheckEnd()
+    {
+        var airCheck = _cranes.Where(c => c.IsAir).Sum(c => c.Flow(LogicEnum.Box));
+        Debug.Log($"Воздуха в коробке {airCheck}");
+
+        var poisonCheck = _cranes.Where(c => !c.IsAir).Sum(c => c.Flow(LogicEnum.Box));
+        Debug.Log($"Яда в коробке {poisonCheck}");
+
+        return airCheck != 0 && airCheck == poisonCheck;
+    }
 }
