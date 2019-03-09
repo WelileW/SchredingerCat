@@ -63,9 +63,11 @@ public class TubeCreatorControl : MonoBehaviour
                 var isAir = i < _wCenter;
                 var adding = isAir ? -_space : _space;
 
+                var invertJ = _height - j - 1;
+
                 var control = Instantiate(
                     GetTubePattern(_level.Tubes[i,j]), 
-                    new Vector3(_titleWidth * (i - _wCenter + 0.5F) + adding, _titleHeight * (j - _hCenter), _z), 
+                    new Vector3(_titleWidth * (i - _wCenter + 0.5F) + adding, _titleHeight * (invertJ - _hCenter), _z), 
                     Quaternion.identity);
 
                 control.MultiRotate(_level.Rotations[i, j]);
@@ -102,8 +104,8 @@ public class TubeCreatorControl : MonoBehaviour
             {
                 var tube = _map[i, j];
 
-                tube.SetTop(FindTube(i, j + 1));
-                tube.SetBottom(FindTube(i, j - 1));
+                tube.SetTop(FindTube(i, j - 1));
+                tube.SetBottom(FindTube(i, j + 1));
                 tube.SetLeft(FindTube(i - 1, j));
                 tube.SetRight(FindTube(i + 1, j));
             }
