@@ -17,30 +17,10 @@ public class GameControl : Singleton<GameControl>
     // Singletone
     public static GameControl _instance;
 
-    //public GameControl()
-    //{
-    //    _level = 1;
-    //    _state = GameState.Title;
-    //}
-
     //// Init
     void Awake()
     {
         _instance = this;
-        //if (_instance == null)
-        //{
-        //    _instance = this;
-        //    //_level = 1;
-        //    //_state = GameState.Title;
-        //    //DontDestroyOnLoad(gameObject);
-        //}
-        //else if (_instance != this)
-        //{
-        //    //_level = _instance._level;
-        //    //_state = _instance._state;
-        //    Destroy(_instance);
-        //    _instance = this;
-        //}
     }
 
     void OnGUI()
@@ -55,8 +35,7 @@ public class GameControl : Singleton<GameControl>
                     GameStatus.Instance._state = GameState.Disclaimer;
                     break;
                 case GameState.Disclaimer:
-                    SceneManager.LoadScene("level", LoadSceneMode.Single);
-                    GameStatus.Instance._state = GameState.Level;
+                    StartLevel();
                     break;
                 default:
                     break;
@@ -64,5 +43,19 @@ public class GameControl : Singleton<GameControl>
         }
     }
 
+    public void StartLevel()
+    {
+        var maxLevel = 3;
 
+        if (GameStatus.Instance._level > maxLevel)
+        {
+            SceneManager.LoadScene("final", LoadSceneMode.Single);
+            GameStatus.Instance._state = GameState.Final;
+            return;
+        }
+        
+
+        SceneManager.LoadScene("level", LoadSceneMode.Single);
+        GameStatus.Instance._state = GameState.Level;
+    }
 }
