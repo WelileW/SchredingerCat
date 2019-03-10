@@ -8,6 +8,8 @@ public class TubeCreatorControl : MonoBehaviour
     public AngleTubeControl _angleTubeControl;
     public ThreeTubeControl _threeTubePattern;
     public FourTubeControl _fourTubeControl;
+    public LeftCraneControl LeftCrane;
+    public RightCraneControl RightCrane;
 
     private float _titleHeight = 2.5F;
     private float _titleWidth = 2.5F;
@@ -38,6 +40,9 @@ public class TubeCreatorControl : MonoBehaviour
 
         // Создем трубы
         CreateTubes(levelControl);
+
+        // Создем краны
+        CreateCranes();
 
         // Прокидываем ссылки
         ConnectTubes();
@@ -77,6 +82,21 @@ public class TubeCreatorControl : MonoBehaviour
 
                 _map[i, j] = control;
             }
+        }
+    }
+
+    private void CreateCranes()
+    {
+        foreach (var crane in _level.CranePoison)
+        {
+            var invertJ = _height - crane.Key - 1;
+            Instantiate(LeftCrane, new Vector3(-13.25F, _titleHeight * (invertJ - _hCenter), _z), Quaternion.identity);
+        }
+
+        foreach (var crane in _level.CranePoison)
+        {
+            var invertJ = _height - crane.Key - 1;
+            Instantiate(RightCrane, new Vector3(13.25F, _titleHeight * (invertJ - _hCenter), _z), Quaternion.identity);
         }
     }
 
@@ -138,7 +158,7 @@ public class TubeCreatorControl : MonoBehaviour
     {
         List<Crane> result = new List<Crane>();
 
-        foreach (var crane in _level.СraneAir)
+        foreach (var crane in _level.CranePoison)
         {
             result.Add(new Crane(_map[0, crane.Key], SideEnum.Right, crane.Value, true));
         }
@@ -160,12 +180,12 @@ public class TubeCreatorControl : MonoBehaviour
     private void ConnectBox()
     {
         var box = new Box(LogicEnum.Box);
-        for (int j = 1; j < _height - 1; j++)
+        for (int j = 1; j < _height - 2; j++)
         {
             _map[_wCenter - 1, j].SetRight(box);
         }
 
-        for (int j = 1; j < _height - 1; j++)
+        for (int j = 1; j < _height - 2; j++)
         {
             _map[_wCenter, j].SetLeft(box);
         }

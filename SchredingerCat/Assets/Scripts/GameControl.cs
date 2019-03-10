@@ -35,8 +35,7 @@ public class GameControl : Singleton<GameControl>
                     GameStatus.Instance._state = GameState.Disclaimer;
                     break;
                 case GameState.Disclaimer:
-                    SceneManager.LoadScene("level", LoadSceneMode.Single);
-                    GameStatus.Instance._state = GameState.Level;
+                    StartLevel();
                     break;
                 default:
                     break;
@@ -44,5 +43,19 @@ public class GameControl : Singleton<GameControl>
         }
     }
 
+    public void StartLevel()
+    {
+        var maxLevel = 3;
 
+        if (GameStatus.Instance._level > maxLevel)
+        {
+            SceneManager.LoadScene("final", LoadSceneMode.Single);
+            GameStatus.Instance._state = GameState.Final;
+            return;
+        }
+        
+
+        SceneManager.LoadScene("level", LoadSceneMode.Single);
+        GameStatus.Instance._state = GameState.Level;
+    }
 }

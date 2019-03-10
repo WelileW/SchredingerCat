@@ -51,3 +51,7 @@ MonoBehaviour:
     type: 3}
   _fourTubeControl: {fileID: 1312739951443895732, guid: cad38a0152c83a6428a134cba34c45f3,
     type: 3}
+  LeftCrane: {fileID: 2209765579489153136, guid: 96e1fe20c2b21854090fe4f8acc64bc0,
+    type: 3}
+  RightCrane: {fileID: 316985502668325190, guid: 75ec9c0dfd26464458b70b05f165a7fd,
+    type: 3}
