@@ -2,64 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameControl : MonoBehaviour
+public enum GameState
+{
+    Title,
+    Disclaimer,
+    Level,
+    Final
+}
+
+public class GameControl : Singleton<GameControl>
 {
     // Singletone
     public static GameControl _instance;
 
-    public TubeCreatorControl _tubeCreator;
+    //public GameControl()
+    //{
+    //    _level = 1;
+    //    _state = GameState.Title;
+    //}
 
-    public LeftCounterControl _airCounter;
-    public RightCounterControl _poisonCounter;
-
-    private List<Crane> _cranes;
-
-    // Init
+    //// Init
     void Awake()
     {
-        if (_instance == null)
+        _instance = this;
+        //if (_instance == null)
+        //{
+        //    _instance = this;
+        //    //_level = 1;
+        //    //_state = GameState.Title;
+        //    //DontDestroyOnLoad(gameObject);
+        //}
+        //else if (_instance != this)
+        //{
+        //    //_level = _instance._level;
+        //    //_state = _instance._state;
+        //    Destroy(_instance);
+        //    _instance = this;
+        //}
+    }
+
+    void OnGUI()
+    {
+        Event e = Event.current;
+        if (e.isMouse && e.type == EventType.MouseDown)
         {
-            _instance = this;
+            switch (GameStatus.Instance._state)
+            {
+                case GameState.Title:
+                    SceneManager.LoadScene("disclaimer", LoadSceneMode.Single);
+                    GameStatus.Instance._state = GameState.Disclaimer;
+                    break;
+                case GameState.Disclaimer:
+                    SceneManager.LoadScene("level", LoadSceneMode.Single);
+                    GameStatus.Instance._state = GameState.Level;
+                    break;
+                default:
+                    break;
+            }
         }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
     }
 
-    void Start()
-    {
-        _cranes = _tubeCreator.Generate(Level.GetLevelOne());
 
-        CheckMeasure();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void CheckMeasure()
-    {
-        var airCheck = _cranes.Where(c => c.IsAir).Sum(c => c.Flow(LogicEnum.AirCounter));
-        Debug.Log($"Воздуха в счетчике {airCheck}");
-        _airCounter.SetScore(airCheck);
-
-        var poisonCheck = _cranes.Where(c => !c.IsAir).Sum(c => c.Flow(LogicEnum.PoisonCounter));
-        Debug.Log($"Яда в счетчике {poisonCheck}");
-        _poisonCounter.SetScore(poisonCheck);
-    }
-
-    public bool CheckEnd()
-    {
-        var airCheck = _cranes.Where(c => c.IsAir).Sum(c => c.Flow(LogicEnum.Box));
-        Debug.Log($"Воздуха в коробке {airCheck}");
-
-        var poisonCheck = _cranes.Where(c => !c.IsAir).Sum(c => c.Flow(LogicEnum.Box));
-        Debug.Log($"Яда в коробке {poisonCheck}");
-
-        return airCheck != 0 && airCheck == poisonCheck;
-    }
 }

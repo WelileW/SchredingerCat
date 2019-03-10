@@ -24,7 +24,7 @@ public class TubeCreatorControl : MonoBehaviour
 
     private TubeControl[,] _map;
 
-    public List<Crane> Generate(Level level)
+    public List<Crane> Generate(Level level, LevelControl levelControl)
     {
         _height = level.Height;
         _width = level.Width;
@@ -37,7 +37,7 @@ public class TubeCreatorControl : MonoBehaviour
         _map = new TubeControl[_width, _height];
 
         // Создем трубы
-        CreateTubes();
+        CreateTubes(levelControl);
 
         // Прокидываем ссылки
         ConnectTubes();
@@ -54,7 +54,7 @@ public class TubeCreatorControl : MonoBehaviour
         return cranes;
     }
 
-    private void CreateTubes()
+    private void CreateTubes(LevelControl level)
     {
         for (int i = 0; i < _width; i++)
         {
@@ -73,6 +73,7 @@ public class TubeCreatorControl : MonoBehaviour
                 control.MultiRotate(_level.Rotations[i, j]);
                 control.IsAir = isAir;
                 control.Id = i * 10 + j;
+                control.Level = level;
 
                 _map[i, j] = control;
             }

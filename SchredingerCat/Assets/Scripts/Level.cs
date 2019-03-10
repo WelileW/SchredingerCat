@@ -17,6 +17,17 @@ public class Level
     public Dictionary<int, int> СraneAir;
     public Dictionary<int, int> CranePoison;
 
+    public static Level GetLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return GetLevelOne();
+            default:
+                return null;
+        }
+    }
+
     public static Level GetLevelOne()
     {
         var level = new Level();

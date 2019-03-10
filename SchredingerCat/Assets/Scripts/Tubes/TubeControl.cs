@@ -11,17 +11,17 @@ public class TubeControl : MonoBehaviour, BaseInterface
     private BaseInterface _left = null;
     private BaseInterface _right = null;
 
+    public LevelControl Level;
     public bool IsAir;
-
     public int Id;
 
     protected List<SideEnum> _connected;
 
     void OnMouseDown()
     {
-        Rotate(); 
+        Rotate();
 
-        GameControl._instance.CheckMeasure();
+        Level.CheckMeasure();
     }
 
     public void SetTop(BaseInterface top)
