@@ -38,8 +38,12 @@ public class LevelControl : MonoBehaviour
         if (_isEnd && _endCounter < 25)
         {
             Box.localScale += new Vector3(0.1F, 0.1F, 0);
-            Back.localScale += new Vector3(0.1F, 0.1F, 0);
             Box.Translate(0.05F, 0, 0);
+        }
+
+        if (_isEnd && _endCounter < 50)
+        {
+            Back.localScale += new Vector3(0.1F, 0.1F, 0);
             Back.Translate(0.05F, 0, 0);
             _endCounter++;
         }
@@ -84,11 +88,11 @@ public class LevelControl : MonoBehaviour
 
         var spriteBox = Box.GetComponent<SpriteRenderer>();
         if (spriteBox)
-            spriteBox.sortingOrder = 10;
+            spriteBox.sortingOrder = 100;
 
         var spriteBack = Back.GetComponent<SpriteRenderer>();
         if (spriteBack)
-            spriteBack.sortingOrder = 4;
+            spriteBack.sortingOrder = 40;
 
         Sprite catState;
         if (_isWin)
