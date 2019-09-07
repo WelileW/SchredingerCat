@@ -120,6 +120,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &66769244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66769246}
+  - component: {fileID: 66769245}
+  m_Layer: 0
+  m_Name: StartController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &66769245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66769244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab3cb1b290553947b374e5572b9a82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &66769246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66769244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6547155, y: 0.17885451, z: -18263.906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &159902174
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +357,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98643ccad6922f540b7502fb59f6919d, type: 3}
+--- !u!1 &471906645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1324219962269858128, guid: 98643ccad6922f540b7502fb59f6919d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1324219962559343106}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &471906646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471906645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd511fc28e2f6d246bae77cd8b408841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainController: {fileID: 66769245}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,5 +814,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1324219962269858135, guid: 98643ccad6922f540b7502fb59f6919d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 98643ccad6922f540b7502fb59f6919d, type: 3}
